@@ -104,8 +104,9 @@ node<T>* tree<T>::next(node<T> * elem){
     node<T>* ret = elem;
 
     if ( elem->right == 0 ){
-        if( elem->parent != 0 ){ return elem->parent; }
-    } else for( ret = ret->right; ret->left != 0; ret = ret->left );
+        if( elem->parent != 0 && elem->parent->left == elem ){ return elem->parent; }
+        else return this;
+    } else for ( ret = ret->right; ret->left != 0; ret = ret->left );
 
     return ret;
 }
@@ -115,11 +116,13 @@ node<T>* tree<T>::prev(node<T> * elem){
     node<T>* ret = elem;
 
     if ( elem->left == 0 ){
-        if( elem->parent != 0 ){ return elem->parent; }
+        if( elem->parent != 0 && elem->parent->right == elem ){ return elem->parent; }
+        else return this;
     } else for( ret = ret->left; ret->right != 0; ret = ret->right );
 
     return ret;
 }
+
 
 int main(){
 
